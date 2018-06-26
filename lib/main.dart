@@ -33,18 +33,18 @@ class _HomePageState extends State<HomePage>{
 
   Widget _bodyWidget(){
     return new Container(
-      padding: const EdgeInsets.all(150.0),
+      padding: const EdgeInsets.all(50.0),
       child: new Center(
         child: new Column(
           children: <Widget>[
             new Text(text),
-            new Image.asset(
-              'images/transpole_logo.png',
-              fit: BoxFit.cover,
-            ),
             new RaisedButton(
               child: new Text("CLICK"),
               onPressed: _changeText,
+            ),
+            new Image.asset(
+              'images/transpole_logo.png',
+              fit: BoxFit.cover,
             )
           ],
         ),
