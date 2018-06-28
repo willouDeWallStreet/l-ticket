@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage>{
   void _goPage2(){
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SecondScreen()),
+      SecondScreen(),
     );
   }
 
