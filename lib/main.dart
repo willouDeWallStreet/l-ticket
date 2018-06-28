@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'page2.dart';
 
 void main() => runApp(new MyApp());
 
@@ -19,32 +20,33 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage>{
 
-  String text = "Great App, isn't it ?";
-
-  void _changeText(){
-    setState(() {
-      if(text.startsWith("G")){
-        text = "WHAOOOU !";
-      }else{
-        text = "Great App, isn't it ?";
-      }
-    });
+  void _goPage2(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SecondScreen()),
+    );
   }
 
   Widget _bodyWidget(){
     return new Container(
-      padding: const EdgeInsets.all(50.0),
+      padding: const EdgeInsets.only(top: 140.0, left: 10.0, right: 10.0),
       child: new Center(
         child: new Column(
           children: <Widget>[
-            new Text(text),
-            new RaisedButton(
-              child: new Text("CLICK"),
-              onPressed: _changeText,
-            ),
             new Image.asset(
-              'images/transpole_logo.png',
+              'images/transpole_logo2.png',
               fit: BoxFit.cover,
+            ),
+            new Container(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: new RaisedButton(
+                color: Theme.of(context).accentColor,
+                child: new Text(
+                  "CLICK",
+                  style: new TextStyle(color: Colors.white, fontSize: 20.0),
+                ),
+                onPressed: _goPage2,
+              )
             )
           ],
         ),
@@ -64,3 +66,4 @@ class _HomePageState extends State<HomePage>{
     );
   }
 }
+
