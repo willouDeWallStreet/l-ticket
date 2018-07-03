@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/rapt_app.iml" filepath="$PROJECT_DIR$/rapt_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/l-ticket.iml" filepath="$PROJECT_DIR$/l-ticket.iml" />
       <module fileurl="file://$PROJECT_DIR$/rapt_app_android.iml" filepath="$PROJECT_DIR$/rapt_app_android.iml" />
     </modules>
   </component>
