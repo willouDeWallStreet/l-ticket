@@ -1,8 +1,11 @@
-# rapt_app
+# L-Ticket
 
-A new Flutter project.
+It's M-Ticket v.-1 
+The main aim of this Flutter project is to show how use Google Maps API with Flutter.
 
-## Getting Started
+## Splash Screen
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+It's the first application screen. The Splash screen runs during 3 sec.
+
+## Home Screen
+
