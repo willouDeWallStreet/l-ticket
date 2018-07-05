@@ -18,6 +18,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final textController = new TextEditingController();
 
+  final formKey = new GlobalKey<FormState>();
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  String _email;
+  String _password;
+
   MapView mapView = new MapView();
   CameraPosition cameraPosition;
   var staticMapProvider = new StaticMapProvider(apiKey);
@@ -53,9 +59,25 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  void _submit() {
+    final form = formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      performLogin();
+    }
+  }
+
+  void performLogin() {
+    final snackbar = new SnackBar(
+      content: new Text("Email : $_email, password : $_password"),
+    );
+    scaffoldKey.currentState.showSnackBar(snackbar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: scaffoldKey,
       appBar: new AppBar(
         title: Center(
           child: Text("L-Ticket maps"),
@@ -85,23 +107,39 @@ class _HomeScreenState extends State<HomeScreen> {
               ]
             ),
           ),
-          new Container(
-            padding: const EdgeInsets.only(top: 15.0, left: 25.0, right: 25.0),
-            child: TextField(
-              onChanged: (text)=> print("Mon départ $text"),
-              controller: textController,
-              decoration: InputDecoration(
-                labelText: 'Départ'
+          new Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: new Form(
+              key: formKey,
+              child: new Column(
+                children: <Widget>[
+                  new TextFormField(
+                    decoration: new InputDecoration(labelText: "Email"),
+                    validator: (val) =>
+                        !val.contains('@') ? 'Invalid Email' : null,
+                    onSaved: (val) => _email = val,
+                  ),
+                  new TextFormField(
+                    decoration: new InputDecoration(labelText: "Password"),
+                    validator: (val) =>
+                        val.length < 6 ? 'Password too short' : null,
+                    onSaved: (val) => _password = val,
+                    obscureText: true,
+                  ),
+                  new Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                  ),
+                  new RaisedButton(
+                    child: new Text(
+                      "login",
+                      style: new TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.blue,
+                    onPressed: _submit,
+                  )
+                ],
               ),
             ),
-          ),
-          new Container(
-            padding: const EdgeInsets.only(top: 15.0, left: 25.0, right: 25.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Arrivée'
-                ),
-              ),
           )
         ]
       )
