@@ -21,8 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  String _email;
-  String _password;
+  String _lat;
+  String _long;
 
   MapView mapView = new MapView();
   CameraPosition cameraPosition;
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void performLogin() {
     final snackbar = new SnackBar(
-      content: new Text("Email : $_email, password : $_password"),
+      content: new Text("Latitude : $_lat, longitude : $_long"),
     );
     scaffoldKey.currentState.showSnackBar(snackbar);
   }
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           new Container(
-            height: 300.0,
+            height: 450.0,
             child: new Stack(
               children: <Widget>[
                 new Center(
@@ -108,30 +108,29 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           new Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(right: 20.0, left: 20.0),
             child: new Form(
               key: formKey,
               child: new Column(
                 children: <Widget>[
                   new TextFormField(
-                    decoration: new InputDecoration(labelText: "Email"),
+                    decoration: new InputDecoration(labelText: "Latitude"),
                     validator: (val) =>
-                        !val.contains('@') ? 'Invalid Email' : null,
-                    onSaved: (val) => _email = val,
+                        !(int.parse(val) >= -90 && int.parse(val) <= 90) ? 'Latitude invalid' : null,
+                    onSaved: (val) => _lat = val,
                   ),
                   new TextFormField(
-                    decoration: new InputDecoration(labelText: "Password"),
+                    decoration: new InputDecoration(labelText: "Longitude"),
                     validator: (val) =>
-                        val.length < 6 ? 'Password too short' : null,
-                    onSaved: (val) => _password = val,
-                    obscureText: true,
+                        !(int.parse(val) >= -180 && int.parse(val) <= 180) ? 'Longitude invalid' : null,
+                    onSaved: (val) => _long = val,
                   ),
                   new Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                   ),
                   new RaisedButton(
                     child: new Text(
-                      "login",
+                      "Search",
                       style: new TextStyle(color: Colors.white),
                     ),
                     color: Colors.blue,
