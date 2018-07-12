@@ -12,7 +12,7 @@ This *MAP* app develop in Flutter, which is based on RATP app. The app aim is sh
 The Splash screen is the first app screen. It has a duration of 3 secondes and it is composed with Transpole logo. +
 
 .Transpole Logo
-image::./transpole_logo2.png[Transpole Logo,300,400]
+image::../images/transpole_logo2.png[Transpole Logo,300,400]
 
 
 === HomeScreen
