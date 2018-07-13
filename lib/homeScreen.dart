@@ -74,20 +74,86 @@ class _HomeScreenState extends State<HomeScreen> {
     scaffoldKey.currentState.showSnackBar(snackbar);
   }
 
+  showMap() {
+    mapView.show(new MapOptions(
+        mapViewType: MapViewType.normal,
+        initialCameraPosition:
+            new CameraPosition(new Location(50.632541, 3.048307), 16.0),
+        showUserLocation: true,
+        title: "Lieux Favoris"));
+
+    mapView.onMapTapped.listen((_) {
+      setState(() {
+        mapView.setMarkers(markers);
+        mapView.zoomToFit(padding: 100);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       key: scaffoldKey,
       appBar: new AppBar(
-        title: Center(
-          child: Text("L-Ticket maps"),
+        title: Text("Menu"),
+        actions: <Widget>[
+          Center(
+            child: new Container(
+              margin: const EdgeInsets.only(right: 30.0),
+              child: new Text(
+                "Favoris",
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+            )
+          )
+        ]
+      ),
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget> [
+            new DrawerHeader(
+              child: new Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/MEL_logo.jpg')
+                  ),
+                ),
+              ), 
+            ),
+            new Container(
+              margin: const EdgeInsets.only(right: 10.0, left: 10.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Recherche'
+                ),
+              ),
+            ),
+            new ListTile(
+              title: new Text('Home'),
+              onTap: () {},
+            ),
+            new ListTile(
+              title: new Text('Itinéraire'),
+              onTap: () {},
+            ),
+            new ListTile(
+              title: new Text('Horaire'),
+              onTap: () {},
+            ),
+            new Divider(),
+            new ListTile(
+              title: new Text('About'),
+              onTap: () {},
+            ),
+          ],
         )
       ),
       body: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           new Container(
-            height: 450.0,
+            height: 400.0,
             child: new Stack(
               children: <Widget>[
                 new Center(
@@ -103,6 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: new Center(
                     child: new Image.network(staticMapUri.toString()),
                   ),
+                  onTap: showMap,
                 ),
               ]
             ),
